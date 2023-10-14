@@ -29,7 +29,7 @@ const Tabs = () => {
         }
     ];
 
-    const handleTabClick = (e) => {
+    const handleTabClick = (e: any) => {
         setCurrentTab(e.target.id);
     };
 
@@ -37,7 +37,7 @@ const Tabs = () => {
         <div className='container'>
             <div className='tabs'>
                 {tabs.map((tab, i) =>
-                    <button key={i} id={tab.id} disabled={currentTab === `${tab.id}`} onClick={handleTabClick}>{tab.tabTitle}</button>
+                    <button key={i} id={tab.id.toString()} disabled={currentTab === `${tab.id}`} onClick={handleTabClick}>{tab.tabTitle}</button>
                 )}
             </div>
             <div className='content'>
@@ -45,8 +45,7 @@ const Tabs = () => {
                     <div key={i}>
                         {currentTab === `${tab.id}` && (
                             <div>
-                                <p className='title'>{tab.title}</p>
-                                <p>{tab.content}</p>
+                                {tab.content}
                             </div>
                         )}
                     </div>
