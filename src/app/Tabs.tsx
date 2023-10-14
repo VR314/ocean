@@ -1,7 +1,7 @@
-"use client"
+"use client";
 import React, { useState } from 'react';
-import "./Tabs.css"
-import EventPage from "./EventPage"
+import "./Tabs.css";
+import EventPage from "./EventPage";
 
 const Tabs = () => {
     const [currentTab, setCurrentTab] = useState('1');
@@ -15,7 +15,7 @@ const Tabs = () => {
             id: 2,
             tabTitle: 'Event',
             content: (
-                <EventPage/>
+                <EventPage />
             )
         },
         {
@@ -31,7 +31,7 @@ const Tabs = () => {
 
     const handleTabClick = (e) => {
         setCurrentTab(e.target.id);
-    }
+    };
 
     return (
         <div className='container'>
@@ -54,6 +54,6 @@ const Tabs = () => {
             </div>
         </div>
     );
-}
+};
 
 export default Tabs;

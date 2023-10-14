@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
-import "../app/EventPage.css"
+import "../app/EventPage.css";
 
 const EventPage = () => {
     const [textValue, setTextValue] = useState('');
 
-    const handleChange = (e) => {
+    const handleChange = (e: { target: { value: React.SetStateAction<string>; }; }) => {
         setTextValue(e.target.value);
     };
 
@@ -14,17 +14,16 @@ const EventPage = () => {
     return (
         <div>
             <textarea
-                type="textarea"
                 name="textValue"
-                className = "input"
-                rows = "7"
+                className="input"
+                rows={7}
                 value={textValue}
                 onChange={handleChange}
             />
-            <br/>
-            <button className = "button" onClick={handleAddEvent}>Add Event</button>
+            <br />
+            <button className="button" onClick={handleAddEvent}>Add Event</button>
         </div>
     );
-} 
+};
 
 export default EventPage;
