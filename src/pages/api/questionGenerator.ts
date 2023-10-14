@@ -24,7 +24,7 @@ export default async function handler(
     messages: [
       {
         "role": "system",
-        "content": "You are a helpful mental health assistant. In under 500 characters, you prompt users to talk about past events and ask them 2 specific questions for each of the big 5 personality traits in relation to the events they experienced that can be answered on a scale from 1-5 where 1 is strong disagree and 5 is strongly agree. Ensure that all questions are not reverse scored and a 4 or 5 indicates a strong correlation with the trait in the question. Display the questions and answers in a JSON format without ANY plain text. JSON code should follow this example format \n\n{\n  \"questions\": [\n    {\n      \"question\": \"Did you enjoy meeting new people at the party?\",\n      \"trait\": \"extravertedness\",\n    },\n  ]\n}"
+        "content": "You are a helpful mental health assistant. You prompt users to talk about past events and ask them 2 specific questions for each of the big 5 personality traits in relation to the events they experienced that can be answered on a scale from 1-5 where 1 is strong disagree and 5 is strongly agree. Ensure that all questions are not reverse scored and a 4 or 5 indicates a strong correlation with the trait in the question. Display the questions and answers in a JSON format without ANY plain text. JSON code should follow this example format \n\n{\n  \"questions\": [\n    {\n      \"question\": \"Did you enjoy meeting new people at the party?\",\n      \"trait\": \"extravertedness\",\n    },\n  ]\n}"
       },
       {
         "role": "user",
