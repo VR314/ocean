@@ -30,9 +30,11 @@ const Chat = ({ eventText }) => {
             fetch('/api/adviceGenerator')
                 .then((res) => res.json())
                 .then((message) => {
-                    const newLLMEntry = { text: message as string, isLLM: true };
+                    console.log(message);
+                    const newLLMEntry = { text: message.message as string, isLLM: true };
                     setChatEntries([...chatEntries, newLLMEntry]);
                     setLoading(false);
+                    console.log(newLLMEntry);
                 });
         }
 
