@@ -5,11 +5,11 @@ import React, { useEffect } from 'react';
 
 export function createProgressBars() {
   const barCount = 50;
-  const percent1 = (50 * 90) / 100;
-  const percent2 = (50 * 80) / 100;
-  const percent3 = (50 * 70) / 100;
-  const percent4 = (50 * 60) / 100;
-  const percent5 = (50 * 50) / 100;
+  const percent1 = (50 * ((localStorage.getItem("openness")/9)*20)) / (100);
+  const percent2 = (50 * ((localStorage.getItem("conscientiousness")/9)*20)) / 100;
+  const percent3 = (50 * ((localStorage.getItem("extraversion")/9)*20)) / 100;
+  const percent4 = (50 * ((localStorage.getItem("agreeableness")/9)*20)) / 100;
+  const percent5 = (50 * ((localStorage.getItem("neuroticism")/9)*20)) / 100;
 
   function createBarsAndText(percentage: number, className: string, text: string) {
     const bars = [];
@@ -27,19 +27,19 @@ export function createProgressBars() {
   return (
     <div className="progress-container">
       <div className="progress">
-        {createBarsAndText(percent1, 'selected1', '90%')}
+        {createBarsAndText(percent1, 'selected1', (localStorage.getItem("openness")/9).toFixed(2).toString())}
       </div>
       <div className="progress">
-        {createBarsAndText(percent2, 'selected2', '80%')}
+        {createBarsAndText(percent2, 'selected2', (localStorage.getItem("conscientiousness")/9).toFixed(2).toString())}
       </div>
       <div className="progress">
-        {createBarsAndText(percent3, 'selected3', '70%')}
+        {createBarsAndText(percent3, 'selected3', (localStorage.getItem("extraversion")/9).toFixed(2).toString())}
       </div>
       <div className="progress">
-        {createBarsAndText(percent4, 'selected4', '60%')}
+        {createBarsAndText(percent4, 'selected4', (localStorage.getItem("agreeableness")/9).toFixed(2).toString())}
       </div>
       <div className="progress">
-        {createBarsAndText(percent5, 'selected5', '50%')}
+        {createBarsAndText(percent5, 'selected5', (localStorage.getItem("neuroticism")/9).toFixed(2).toString())}
       </div>
     </div>
   );

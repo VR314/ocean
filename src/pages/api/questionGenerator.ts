@@ -6,7 +6,7 @@ type ResponseData = {
 };
 
 interface UserInput {
-  input: string;
+  message: string;
 }
 
 export default async function handler(
@@ -17,8 +17,7 @@ export default async function handler(
     apiKey: process.env.OPENAI_API_KEY,
   });
 
-  // let userInput: UserInput = req.body as UserInput;
-  let str = "My friend Vivek is really annoying.";
+  let userInput: UserInput = req.body as UserInput;
 
   const gptResponse = await openai.chat.completions.create({
     model: "gpt-3.5-turbo",
@@ -29,7 +28,7 @@ export default async function handler(
       },
       {
         "role": "user",
-        "content": str
+        "content": userInput.message
       }
     ],
     temperature: 1,
@@ -42,7 +41,9 @@ export default async function handler(
   const message = gptResponse.choices[0].message.content;
 
   if (typeof message == 'string') {
-    res.status(200).json(JSON.parse(message));
+    const jsonData = JSON.parse(message);
+    console.log(jsonData.question)
+    res.status(200).json(jsonData);
   } else {
     res.status(500).json({ message: 'Error occurred in GPT API response.' });
   }

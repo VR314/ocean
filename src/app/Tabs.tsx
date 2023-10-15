@@ -10,7 +10,7 @@ const Tabs = () => {
     const tabs = [
         {
             id: 1,
-            tabTitle: 'Tab 1',
+            tabTitle: 'Home',
             content: (
                 <HomeScreen />
             )
@@ -24,7 +24,7 @@ const Tabs = () => {
         },
         {
             id: 3,
-            tabTitle: 'Tab 3',
+            tabTitle: 'Resources',
             content: (
                 <div>
                 </div>

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import ChatEntry from './ChatEntry';
 import "./Chat.css";
 import ChatLogs from './ChatLogs';
@@ -7,7 +7,13 @@ import ChatLogs from './ChatLogs';
 export interface ChatEntryObject {
     text:string;
     isLLM:boolean;
+    message:boolean;
 }
+
+type QuestionType = {
+    question: string;
+    trait: string;
+};
 
 interface ChatProps {
     eventText:string;
@@ -16,7 +22,38 @@ interface ChatProps {
 
 const Chat = (props:ChatProps) => {
     const [textValue, setTextValue] = useState('');
-    const [chatEntries, setChatEntries] = useState([{text: props.eventText, isLLM: false}]);
+    const [isLoading, setLoading] = useState(false);
+    const [questions, setQuestions] = useState([]);
+    const [chatEntries, setChatEntries] = useState([{text: props.eventText, isLLM: false, message:false}, {text: props.eventText, isLLM: true, message:true}]);
+
+    // useEffect(() => {
+    //     setLoading(true);
+    //     fetch('/api/questionGenerator', {
+    //         method: 'POST',
+    //         headers: {
+    //             'Content-Type': 'application/json'
+    //         },
+    //         body: JSON.stringify({ message: props.eventText })
+    //     })
+    //         .then((res) => res.json())
+    //         .then((message) => {
+    //             //console.log(message);
+    //             // setChatEntries([...chatEntries, newLLMEntry]);
+    //             setLoading(false);
+    //             setQuestions(message);
+    //             //console.log(questions);
+                
+                
+    //             // const newUserChatEntry = {
+    //             //     text: textValue,
+    //             //     isLLM: true,
+    //             //     message: questions
+    //             // };
+
+    //             // setChatEntries([...chatEntries, newUserChatEntry]);
+    //         });
+    // }, [])
+
 
     // ADD LLM TO QUESTIONS HERE
 
@@ -29,10 +66,11 @@ const Chat = (props:ChatProps) => {
         if (textValue.trim() !== '') {
             const newUserChatEntry = {
                 text: textValue,
-                isLLM: false
+                isLLM: false,
+                message: false
             };
 
-            setChatEntries([...chatEntries, newChatEntry]);
+            setChatEntries([...chatEntries, newUserChatEntry]);
 
             setTextValue('');
 
@@ -46,7 +84,7 @@ const Chat = (props:ChatProps) => {
                 .then((res) => res.json())
                 .then((message) => {
                     console.log(message);
-                    const newLLMEntry = { text: message.message as string, isLLM: true };
+                    const newLLMEntry = { text: message.message as string, isLLM: true, message: false};
                     setChatEntries([...chatEntries, newLLMEntry]);
                     setLoading(false);
                     console.log(newLLMEntry);
@@ -58,22 +96,22 @@ const Chat = (props:ChatProps) => {
 
     return (
         <div className="chat-whole">
-            {/* ADD THE API STUFF HERE, EVENT TEXT IS THE INITIAL SCENARIO AND REPLACE EVENT TEXT HERE WITH THE QUESTION AND SLIDERS */}
-            <span>{eventText}</span>
             {isLoading &&
                 <span>{'LOADING'}</span>}
 
-            <input
-                name="textValue"
-                className="input"
-                value={textValue}
-                onChange={handleChange}
-
-            />
-            <button onClick={handleAddChatEntry}>></button>
             {chatEntries.map((entry, index) => (
-                <ChatEntry key={index} text={entry.text} isLLM={entry.isLLM} />
+                <ChatEntry key={index} text={entry.text} isLLM={entry.isLLM} message={entry.message} />
             ))}
+            <div>
+                <input
+                    name="textValue"
+                    className="chat-input"
+                    value={textValue}
+                    onChange={handleChange}
+
+                />
+                <button onClick={handleAddChatEntry} className="chat-button">Send</button>
+            </div>
         </div>
     );
 };

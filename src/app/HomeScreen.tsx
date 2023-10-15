@@ -10,14 +10,19 @@ const HomeScreen = () => {
       }, []);
     
       return (
-        <main className="flex min-h-screen flex-col items-center justify-between p-24">
+        <main >
               <Profile/> 
-              {createProgressBars()}
-              <div className="progress"></div>
-              <div className="progress"></div>
-              <div className="progress"></div>
-              <div className="progress"></div>
-              <div className="progress"></div>
+              <div className="progress-container">               
+                {createProgressBars()}
+              </div>
+              <div className='progress-label'>
+                <br></br>
+              <p style = {{fontSize: "xx-large"}}>Openess</p>
+              <p style = {{fontSize: "xx-large"}}>Concientiousness</p>
+              <p style = {{fontSize: "xx-large"}}>Extraversion</p>
+              <p style = {{fontSize: "xx-large"}}>Agreeableness</p>
+              <p style={{ fontSize: "xx-large", width: "100px" }}>Neuroticism</p>
+              </div>
         </main>
       )
 };
