@@ -2,13 +2,15 @@
     width: 100%;
     color: black;
     font-size: x-large;
+    border-radius: 3px;
 }
 .button {
     background-color: lightgray;
     padding: 5px;
     width: 100%;
+    border-radius: 3px;
 }
 .button:hover {
-    color: white;
-    background-color: rgba(255, 255, 255, 0.15);
+    color: rgb(1, 1, 1);
+    background-color: rgb(255, 255, 255);
 }
