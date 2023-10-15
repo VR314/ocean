@@ -1,15 +1,24 @@
 import React, { useState } from 'react';
 import ChatEntry from './ChatEntry';
+import "./Chat.css";
+import ChatLogs from './ChatLogs';
 
-interface ChatEntry {
-    text: string;
-    isLLM: boolean;
+
+export interface ChatEntryObject {
+    text:string;
+    isLLM:boolean;
 }
 
-const Chat = ({ eventText }) => {
+interface ChatProps {
+    eventText:string;
+    toggleModal:boolean;
+}
+
+const Chat = (props:ChatProps) => {
     const [textValue, setTextValue] = useState('');
-    const [chatEntries, setChatEntries] = useState([ChatEntry]);
-    const [isLoading, setLoading] = useState(false);
+    const [chatEntries, setChatEntries] = useState([{text: props.eventText, isLLM: false}]);
+
+    // ADD LLM TO QUESTIONS HERE
 
     const handleChange = (e) => {
         setTextValue(e.target.value);
@@ -18,7 +27,7 @@ const Chat = ({ eventText }) => {
     const handleAddChatEntry = () => {
         setLoading(true);
         if (textValue.trim() !== '') {
-            const newChatEntry = {
+            const newUserChatEntry = {
                 text: textValue,
                 isLLM: false
             };
@@ -45,9 +54,10 @@ const Chat = ({ eventText }) => {
         }
 
     };
+    
 
     return (
-        <div>
+        <div className="chat-whole">
             {/* ADD THE API STUFF HERE, EVENT TEXT IS THE INITIAL SCENARIO AND REPLACE EVENT TEXT HERE WITH THE QUESTION AND SLIDERS */}
             <span>{eventText}</span>
             {isLoading &&

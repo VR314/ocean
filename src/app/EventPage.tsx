@@ -18,11 +18,17 @@ const EventPage = () => {
     };
 
     const toggleModal = () => {
-        setModalOpened(!modalOpened);
+        if (modalOpened) {
+            setModalOpened(!modalOpened);
+        }
+        if (textValue.trim() !== '') {
+            setModalOpened(!modalOpened);
+        }
     };
 
 
     const handleAddEvent = () => {
+        
         toggleModal();
         // Create a new item object with a unique ID and the label from the input
         const newItemObject = {
@@ -52,9 +58,9 @@ const EventPage = () => {
                 <Modal
                 isOpen={modalOpened}
                 onRequestClose={toggleModal}
-                contentLabel="Modal with image"
+                contentLabel="Modal"
                 >
-                    <Chat eventText={eventText}/>
+                    <Chat eventText={eventText} toggleModal={modalOpened}/>
                 </Modal>
                 <History items = {items}/>
         </div>
