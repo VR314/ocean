@@ -3,12 +3,12 @@ import React from 'react';
 
 
 
-const ChatEntry = ({text, isLLM}) => {
+const ChatEntry = ({ text, isLLM }) => {
     return (
         <div>
             {isLLM ? (
                 <>
-                    <p>Alternative content</p>
+                    <p>{text}</p>
                     <span className="time-left">11:00</span>
                 </>
             ) : (

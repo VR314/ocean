@@ -27,7 +27,13 @@ const Chat = ({ eventText }) => {
 
             setTextValue('');
 
-            fetch('/api/adviceGenerator')
+            fetch('/api/adviceGenerator', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ message: textValue })
+            })
                 .then((res) => res.json())
                 .then((message) => {
                     console.log(message);
