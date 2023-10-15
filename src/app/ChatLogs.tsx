@@ -12,7 +12,7 @@ const ChatLogs = (props:ChatLogsProps) => {
     return (
         <div className = "chat-chats">
                 {props.chatEntries.map((entry, index) => (
-                    <ChatEntry key={index} text={entry.text} isLLM={entry.isLLM} message={false}/>
+                    <ChatEntry key={index} text={entry.text} isLLM={entry.isLLM} message={entry.message}/>
                 ))}
         </div>
     );

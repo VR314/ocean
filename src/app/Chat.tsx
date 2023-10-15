@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import ChatEntry from './ChatEntry';
 import "./Chat.css";
 import ChatLogs from './ChatLogs';
@@ -60,7 +60,6 @@ const Chat = (props:ChatProps) => {
     const handleChange = (e) => {
         setTextValue(e.target.value);
     };
-
     const handleAddChatEntry = () => {
         setLoading(true);
         if (textValue.trim() !== '') {
@@ -85,35 +84,31 @@ const Chat = (props:ChatProps) => {
                 .then((message) => {
                     console.log(message);
                     const newLLMEntry = { text: message.message as string, isLLM: true, message: false};
-                    setChatEntries([...chatEntries, newLLMEntry]);
+                    setChatEntries([...chatEntries, newUserChatEntry, newLLMEntry]);
                     setLoading(false);
                     console.log(newLLMEntry);
                 });
         }
-
     };
     
-
     return (
         <div className="chat-whole">
-            {isLoading &&
-                <span>{'LOADING'}</span>}
-
-            {chatEntries.map((entry, index) => (
-                <ChatEntry key={index} text={entry.text} isLLM={entry.isLLM} message={entry.message} />
-            ))}
+            {isLoading && <span>{'LOADING'}</span>}
+            {/* ADD THE API STUFF HERE, EVENT TEXT IS THE INITIAL SCENARIO AND REPLACE EVENT TEXT HERE WITH THE QUESTION AND SLIDERS */}
+            <span>{props.eventText}</span> 
+            <ChatLogs chatEntries={chatEntries}/>
             <div>
                 <input
                     name="textValue"
-                    className="chat-input"
                     value={textValue}
                     onChange={handleChange}
-
+                    className='chat-input'
                 />
-                <button onClick={handleAddChatEntry} className="chat-button">Send</button>
+                <button onClick={handleAddChatEntry} className = "chat-button"> Send </button>
             </div>
         </div>
     );
+      
 };
 
 export default Chat;

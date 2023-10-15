@@ -1,13 +1,10 @@
 .chat-whole {
-    position: absolute;
-    bottom: 0;
-    left: 0; /* Add this to ensure it starts from the left edge */
-    right: 0; /* Add this to ensure it extends to the right edge */
-    width: 100%;
-    margin: 0;
-    padding: 10px; /* Optional padding for better styling */
-    border: 1px solid #ccc; /* Optional border for styling */
+    padding: 10px;
+    background-color: aqua;
+    border: 1px solid #ccc;
     border-radius: 5px;
+    max-height: 750px;
+    overflow-y: auto;
 }
 
 .chat-input {

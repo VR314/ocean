@@ -4,6 +4,7 @@ import "./Tabs.css";
 import EventPage from "./EventPage";
 import Chat from './Chat';
 import HomeScreen from './HomeScreen';
+import Resources from './Resources';
 
 const Tabs = () => {
     const [currentTab, setCurrentTab] = useState('1');
@@ -26,8 +27,7 @@ const Tabs = () => {
             id: 3,
             tabTitle: 'Resources',
             content: (
-                <div>
-                </div>
+                <Resources />
             )
         }
     ];

@@ -1,0 +1,47 @@
+.resources-page {
+    max-height: 700px;
+    height: 1000px;
+    background-color: #595353;
+    overflow-y: auto;
+
+}
+
+.item {
+    padding: 10px;
+    background-color: white;
+    font-family: 'Courier New', Courier, monospace;
+}
+
+.book-title {
+    font-size: xx-large;
+    font-family: sans-serif;
+    text-decoration: underline; /* Underline the book titles */
+    display: inline-block;
+    padding: 10px 15px; /* Add padding for a "bubble" effect */
+    background-color: #f0f0f0; /* Background color for the "bubble" */
+    border: 2px solid #666; /* Border for the "bubble" */
+    border-radius: 10px; /* Rounded corners for the "bubble" */
+    margin-bottom: 10px; /* Add space between book titles */
+  }
+
+  /* In your Resources.css file */
+
+.book-info {
+    display: inline-block;
+    padding: 15px;
+    background-color: #f0f0f0;
+    border: 2px solid #666;
+    border-radius: 10px;
+    margin-bottom: 20px; /* Add space between book info bubbles */
+  }
+  
+  .book-title {
+    font-size: xx-large;
+    font-family: sans-serif;
+    text-decoration: underline; /* Underline the book titles */
+  }
+  
+  .book-description {
+    font-size: large;
+  }
+  
