@@ -21,10 +21,8 @@ const ChatEntry = (props: ChatEntryProps) => {
   const [sliderValues, setSliderValues] = useState<number[]>(
     Array(questions.length).fill(Math.floor(Math.random() * (5 - 1 + 1)) + 1)
   );
-  const [comeback, setComeback] = useState(true);
 
   const handleSliderChange = (value, index) => {
-    setComeback(false);
     const updatedValues = [...sliderValues];
     updatedValues[index] = value;
     setSliderValues(updatedValues);
@@ -32,6 +30,9 @@ const ChatEntry = (props: ChatEntryProps) => {
 
   // Function to handle the "Submit" button
   const handleButtonClick = () => {
+    
+
+
     saveSliderValues(sliderValues);
 
     console.log('Extraversion Score:', sliderValues[0].toString());
@@ -54,12 +55,11 @@ const ChatEntry = (props: ChatEntryProps) => {
     localStorage.setItem('slidervals', JSON.stringify(sliderValues));
   };
 
-  const now = new Date();
-  const localTime = now.toLocaleTimeString();
+
 
   return (
     <div className={containerClass}>
-      {comeback && props.message ? (
+      {props.message ? (
         <div>
           {questions.map((question, index) => (
             <Question
@@ -76,14 +76,16 @@ const ChatEntry = (props: ChatEntryProps) => {
       ) : (
         <div>
           {props.isLLM ? (
-            <p>{props.text}</p>
+            <div>
+                Therapist
+                <p>{props.text}</p>
+            </div>
           ) : (
             <div>
-              User
+              Vivek Chittepu
               <p>{props.text}</p>
             </div>
           )}
-          <span>{localTime}</span>
         </div>
       )}
     </div>
