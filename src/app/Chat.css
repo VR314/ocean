@@ -1,0 +1,29 @@
+.chat-whole {
+    position: absolute;
+    bottom: 0;
+    left: 0; /* Add this to ensure it starts from the left edge */
+    right: 0; /* Add this to ensure it extends to the right edge */
+    width: 100%;
+    margin: 0;
+    padding: 10px; /* Optional padding for better styling */
+    border: 1px solid #ccc; /* Optional border for styling */
+    border-radius: 5px;
+}
+
+.chat-input {
+    width: 97%;
+    border: 1px solid rgb(139, 132, 132);
+    border-radius: 5px;
+}
+
+.chat-button {
+    border: 1px solid rgb(139, 132, 132);
+    border-radius: 5px;
+}
+
+.chat-chats {
+    max-height: 600px;
+    overflow-y: auto;
+    border: 1px solid rgb(139, 132, 132);
+}
+

@@ -1,32 +1,40 @@
-.container {
+.container-LLM {
     border: 2px solid #dedede;
     background-color: #f1f1f1;
+    width: 75%;
     border-radius: 5px;
     padding: 10px;
-    margin: 10px 0;
-  }
-  
-  /* Darker chat container */
-  .darker {
-    border-color: #ccc;
-    background-color: #ddd;
-  }
-  
-  /* Clear floats */
-  .container::after {
+    margin: 10px;
+    text-align: left;
+    float: left;
+}
+
+.container-user {
+    border: 2px solid #dedede;
+    background-color: #85dfda;
+    width: 75%;
+    border-radius: 5px;
+    padding: 10px;
+    margin: 10px;
+    text-align: right;
+    float: right; /* Align user containers to the right */
+}
+
+/* Clear floats */
+.container::after {
     content: "";
-    clear: both;
+    clear: both; /* Clear both left and right floats */
     display: table;
-  }
-  
-  /* Style time text */
-  .time-right {
+}
+
+/* Style time text */
+.time-right {
     float: right;
     color: #aaa;
-  }
-  
-  /* Style time text */
-  .time-left {
+}
+
+/* Style time text */
+.time-left {
     float: left;
     color: #999;
-  }
+}

@@ -1,22 +1,27 @@
 import React from 'react';
-//import "./Chat.css"
+import "./ChatEntry.css"
 
+interface ChatEntryProps {
+    text: string;
+    isLLM: boolean;
+}
 
+const ChatEntry = (props: ChatEntryProps) => {
+    const containerClass = props.isLLM ? 'container-LLM' : 'container-user';
 
-const ChatEntry = ({text, isLLM}) => {
     return (
-        <div>
-            {isLLM ? (
-                <>
+        <div className={containerClass}>
+            {props.isLLM ? (
+                <div>
                     <p>Alternative content</p>
-                    <span className="time-left">11:00</span>
-                </>
+                    <span>11:00</span>
+                </div>
             ) : (
-                <>
+                <div>
                     User
-                    <p>{text}</p>
-                    <span className="time-right">11:00</span>
-                </>
+                    <p>{props.text}</p>
+                    <span>11:00</span>
+                </div>
             )}
         </div>
     );
