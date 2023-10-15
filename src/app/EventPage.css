@@ -1,0 +1,16 @@
+.input {
+    width: 100%;
+    color: black;
+    font-size: x-large;
+    border-radius: 3px;
+}
+.button {
+    background-color: lightgray;
+    padding: 5px;
+    width: 100%;
+    border-radius: 3px;
+}
+.button:hover {
+    color: rgb(1, 1, 1);
+    background-color: rgb(255, 255, 255);
+}
