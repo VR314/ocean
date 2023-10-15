@@ -3,6 +3,7 @@ import ChatEntry from './ChatEntry';
 import "./Chat.css";
 import ChatLogs from './ChatLogs';
 
+
 export interface ChatEntryObject {
     text:string;
     isLLM:boolean;
@@ -24,43 +25,55 @@ const Chat = (props:ChatProps) => {
     };
 
     const handleAddChatEntry = () => {
+        setLoading(true);
         if (textValue.trim() !== '') {
             const newUserChatEntry = {
                 text: textValue,
                 isLLM: false
             };
-    
-            const newLLMChatEntry = {
-                text: props.eventText,
-                isLLM: true
-            };
-    
-            // Add user chat entry first
-            setChatEntries((prevChatEntries) => [...prevChatEntries, newUserChatEntry]);
-    
-            // Then add LLM chat entry
-            setTimeout(() => {
-                setChatEntries((prevChatEntries) => [...prevChatEntries, newLLMChatEntry]);
-            }, 1000); // Adjust the delay as needed
-    
+
+            setChatEntries([...chatEntries, newChatEntry]);
+
             setTextValue('');
+
+            fetch('/api/adviceGenerator', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ message: textValue })
+            })
+                .then((res) => res.json())
+                .then((message) => {
+                    console.log(message);
+                    const newLLMEntry = { text: message.message as string, isLLM: true };
+                    setChatEntries([...chatEntries, newLLMEntry]);
+                    setLoading(false);
+                    console.log(newLLMEntry);
+                });
         }
+
     };
     
 
     return (
         <div className="chat-whole">
             {/* ADD THE API STUFF HERE, EVENT TEXT IS THE INITIAL SCENARIO AND REPLACE EVENT TEXT HERE WITH THE QUESTION AND SLIDERS */}
-            <ChatLogs chatEntries={chatEntries}/>
-            <div>
-                <input
-                    name="textValue"
-                    value={textValue}
-                    onChange={handleChange}
-                    className='chat-input'
-                />
-                <button onClick={handleAddChatEntry} className = "chat-button"> >>> </button>
-            </div>
+            <span>{eventText}</span>
+            {isLoading &&
+                <span>{'LOADING'}</span>}
+
+            <input
+                name="textValue"
+                className="input"
+                value={textValue}
+                onChange={handleChange}
+
+            />
+            <button onClick={handleAddChatEntry}>></button>
+            {chatEntries.map((entry, index) => (
+                <ChatEntry key={index} text={entry.text} isLLM={entry.isLLM} />
+            ))}
         </div>
     );
 };

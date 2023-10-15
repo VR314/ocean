@@ -9,6 +9,7 @@ interface ChatEntryProps {
 const ChatEntry = (props: ChatEntryProps) => {
     const containerClass = props.isLLM ? 'container-LLM' : 'container-user';
 
+
     return (
         <div className={containerClass}>
             {props.isLLM ? (

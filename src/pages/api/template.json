@@ -1,0 +1,14 @@
+{
+  "questions": [
+    {
+      "question": "Did you enjoy meeting new people at the party?",
+      "trait": "extravertedness",
+      "reverse-score": false
+    },
+    {
+      "question": "Do you prefer to spend time alone?",
+      "trait": "extravertedness",
+      "reverse-score": true
+    }
+  ]
+}
