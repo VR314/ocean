@@ -6,6 +6,8 @@
   --foreground-rgb: 0, 0, 0;
   --background-start-rgb: 214, 219, 220;
   --background-end-rgb: 255, 255, 255;
+  --tlt-br-cnt: 50;
+  --i: 0;
 }
 
 @media (prefers-color-scheme: feSpotLight) {
@@ -13,10 +15,22 @@
     --foreground-rgb: 255, 255, 255;
     --background-start-rgb: 0, 0, 0;
     --background-end-rgb: 0, 0, 0;
+    --tlt-br-cnt: 50;
+    --i: 0;
   }
 }
 
 body {
+  width: 100vw;
+  height: 100vh;
+
+  background: hsl(216, 28%, 7%);;
+
+  overflow: hidden;
+
+  justify-content: space-evenly;
+  align-items: center;
+
   color: rgb(var(--foreground-rgb));
   background: linear-gradient(
       to bottom,
@@ -24,4 +38,124 @@ body {
       rgb(var(--background-end-rgb))
     )
     rgb(var(--background-start-rgb));
+}
+
+
+.progress {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  position: relative;
+}
+
+.progress i {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  transform: rotate(calc(45deg + calc(calc(360deg / var(--tlt-br-cnt)) * var(--i))));
+}
+
+.progress i::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  background: hsla(0, 0%,100%, 12%);;
+  width: 5px;
+  height: 20px;
+  border-radius: 999rem;
+  transform: rotate(-45deg);
+  transform-origin: top;
+  opacity: 0;
+
+  animation: barCreationAnimation 100ms ease forwards;
+  animation-delay: calc(var(--i) * 15ms);
+}
+
+.progress .selected1::after {
+  background: hsl(269, 100%, 50%);
+  box-shadow: 0 0 1px hsl(273, 96%, 34%),
+              0 0 3px hsl(270, 91%, 22%),
+              0 0 4px hsl(130, 100%, 10%);
+}
+
+.progress .selected2::after {
+  background: hsl(229, 96%, 41%);
+  box-shadow: 0 0 1px hsl(235, 96%, 33%),
+              0 0 3px hsl(225, 95%, 22%),
+              0 0 4px hsl(64, 100%, 10%);
+}
+
+.progress .selected3::after {
+  background: hsl(213, 100%, 50%);
+  box-shadow: 0 0 1px hsl(221, 98%, 33%),
+              0 0 3px hsl(231, 96%, 20%),
+              0 0 4px hsl(8, 100%, 10%);
+}
+.progress .selected4::after {
+  background: hsl(202, 100%, 50%);
+  box-shadow: 0 0 1px hsl(213, 98%, 35%),
+              0 0 3px hsl(225, 94%, 21%),
+              0 0 4px hsl(8, 100%, 10%);
+}
+.progress .selected5::after {
+  background: hsl(177, 100%, 50%);
+  box-shadow: 0 0 1px hsl(179, 98%, 32%),
+              0 0 3px hsl(188, 98%, 19%),
+              0 0 4px hsl(8, 100%, 10%);
+}
+
+.percent-text {
+  font-size: 3rem;
+  animation: barCreationAnimation 500ms ease forwards;
+  animation-delay: calc(var(--tlt-br-cnt) * 15ms / 2);
+}
+
+.text1{
+  color: hsl(264, 100%, 50%);
+  text-shadow: 0 0 1px hsl(130, 100%, 50%),
+                  0 0 3px hsl(130, 100%, 30%),
+                  0 0 4px hsl(130, 100%, 10%);
+  opacity: 0;
+}
+
+.text2{
+  color: hsl(64, 100%, 50%);
+  text-shadow: 0 0 1px hsl(64, 100%, 50%),
+              0 0 3px hsl(64, 100%, 30%),
+              0 0 4px hsl(64, 100%, 10%);
+  opacity: 0;
+}
+.text3{
+  color: hsl(8, 100%, 50%);
+  text-shadow: 0 0 1px hsl(8, 100%, 50%),
+  0 0 3px hsl(8, 100%, 30%),
+  0 0 4px hsl(8, 100%, 10%);
+  opacity: 0;
+}
+.text4{
+  color: hsl(8, 100%, 50%);
+  text-shadow: 0 0 1px hsl(8, 100%, 50%),
+  0 0 3px hsl(8, 100%, 30%),
+  0 0 4px hsl(8, 100%, 10%);
+  opacity: 0;
+}
+.text5{
+  color: hsl(8, 100%, 50%);
+  text-shadow: 0 0 1px hsl(8, 100%, 50%),
+  0 0 3px hsl(8, 100%, 30%),
+  0 0 4px hsl(8, 100%, 10%);
+  opacity: 0;
+}
+
+@keyframes barCreationAnimation {
+  from {opacity: 0}
+  to {opacity: 1}
 }
