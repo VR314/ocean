@@ -15,7 +15,9 @@ interface ChatProps {
 
 const Chat = (props:ChatProps) => {
     const [textValue, setTextValue] = useState('');
-    const [chatEntries, setChatEntries] = useState([]);
+    const [chatEntries, setChatEntries] = useState([{text: props.eventText, isLLM: false}]);
+
+    // ADD LLM TO QUESTIONS HERE
 
     const handleChange = (e) => {
         setTextValue(e.target.value);
@@ -49,7 +51,6 @@ const Chat = (props:ChatProps) => {
     return (
         <div className="chat-whole">
             {/* ADD THE API STUFF HERE, EVENT TEXT IS THE INITIAL SCENARIO AND REPLACE EVENT TEXT HERE WITH THE QUESTION AND SLIDERS */}
-            <span>{props.eventText}</span> 
             <ChatLogs chatEntries={chatEntries}/>
             <div>
                 <input
