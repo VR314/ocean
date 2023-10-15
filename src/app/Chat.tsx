@@ -1,58 +1,74 @@
-import React, { useState } from 'react';
+'use client';
+import React, { useEffect, useState } from 'react';
 import ChatEntry from './ChatEntry';
+import { useChat } from 'ai/react';
+import { Message } from 'ai';
 
-interface ChatEntry {
+interface ChatEntryObject {
     text: string;
     isLLM: boolean;
 }
 
-const Chat = ({ eventText }) => {
-    const [textValue, setTextValue] = useState('');
-    const [chatEntries, setChatEntries] = useState([ChatEntry]);
+interface ChatProps {
+    eventText: string;
+}
+
+const Chat = (props: ChatProps) => {
+    const [chatEntries, setChatEntries] = useState([]);
     const [isLoading, setLoading] = useState(false);
+    const { messages, input, handleInputChange, handleSubmit } = useChat({
+        api: '/api/adviceGeneratorStream',
+    });
 
-    const handleChange = (e) => {
-        setTextValue(e.target.value);
+
+    const messageToChatEntryObject = (message: Message): ChatEntryObject => {
+        return {
+            text: message.content,
+            isLLM: false
+        };
     };
 
-    const handleAddChatEntry = () => {
-        setLoading(true);
-        if (textValue.trim() !== '') {
-            const newChatEntry = {
-                text: textValue,
-                isLLM: false
-            };
 
-            setChatEntries([...chatEntries, newChatEntry]);
+    useEffect(() => {
+        if (messages.length !== 0) {
+            setLoading(true);
+            if (input.trim() !== '') {
+                const newChatEntry: ChatEntryObject = messageToChatEntryObject(messages[messages.length - 1]);
 
-            setTextValue('');
+                setChatEntries([...chatEntries, newChatEntry]);
 
-            fetch('/api/adviceGenerator')
-                .then((res) => res.json())
-                .then((message) => {
-                    const newLLMEntry = { text: message as string, isLLM: true };
-                    setChatEntries([...chatEntries, newLLMEntry]);
-                    setLoading(false);
-                });
+                /*
+                fetch('/api/adviceGenerator')
+                    .then((res) => res.json())
+                    .then((message) => {
+                        console.log(message);
+                        const newLLMEntry = { text: message.message as string, isLLM: true };
+                        setChatEntries([...chatEntries, newLLMEntry]);
+                        setLoading(false);
+                        console.log(newLLMEntry);
+                    });
+                    */
+            }
         }
-
-    };
+    }, [messages]);
 
     return (
         <div>
             {/* ADD THE API STUFF HERE, EVENT TEXT IS THE INITIAL SCENARIO AND REPLACE EVENT TEXT HERE WITH THE QUESTION AND SLIDERS */}
-            <span>{eventText}</span>
+            <span>{props.eventText}</span>
             {isLoading &&
                 <span>{'LOADING'}</span>}
 
             <input
                 name="textValue"
                 className="input"
-                value={textValue}
-                onChange={handleChange}
+                value={input}
+                onChange={handleInputChange}
 
             />
-            <button onClick={handleAddChatEntry}>></button>
+            <form onSubmit={handleSubmit}>
+                <button type="submit">{'>'}</button>
+            </form>
             {chatEntries.map((entry, index) => (
                 <ChatEntry key={index} text={entry.text} isLLM={entry.isLLM} />
             ))}
