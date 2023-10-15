@@ -1,36 +1,50 @@
 import React, { useState } from 'react';
 import ChatEntry from './ChatEntry';
 
-const Chat = ({eventText}) => {
+interface ChatEntry {
+    text: string;
+    isLLM: boolean;
+}
+
+const Chat = ({ eventText }) => {
     const [textValue, setTextValue] = useState('');
-    const [chatEntries, setChatEntries] = useState([]);
+    const [chatEntries, setChatEntries] = useState([ChatEntry]);
+    const [isLoading, setLoading] = useState(false);
 
     const handleChange = (e) => {
         setTextValue(e.target.value);
     };
 
     const handleAddChatEntry = () => {
+        setLoading(true);
         if (textValue.trim() !== '') {
             const newChatEntry = {
                 text: textValue,
                 isLLM: false
             };
 
-            const newLLMEntry = {
-                text: textValue,
-                isLLM: true
-            };
-
-            setChatEntries([...chatEntries, newChatEntry, newLLMEntry]);
+            setChatEntries([...chatEntries, newChatEntry]);
 
             setTextValue('');
+
+            fetch('/api/adviceGenerator')
+                .then((res) => res.json())
+                .then((message) => {
+                    const newLLMEntry = { text: message as string, isLLM: true };
+                    setChatEntries([...chatEntries, newLLMEntry]);
+                    setLoading(false);
+                });
         }
+
     };
 
     return (
         <div>
             {/* ADD THE API STUFF HERE, EVENT TEXT IS THE INITIAL SCENARIO AND REPLACE EVENT TEXT HERE WITH THE QUESTION AND SLIDERS */}
-            <span>{eventText}</span> 
+            <span>{eventText}</span>
+            {isLoading &&
+                <span>{'LOADING'}</span>}
+
             <input
                 name="textValue"
                 className="input"
