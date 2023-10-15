@@ -2,6 +2,7 @@
 import React, { useState } from 'react';
 import "./Tabs.css";
 import EventPage from "./EventPage";
+import HomeScreen from './HomeScreen';
 
 const Tabs = () => {
     const [currentTab, setCurrentTab] = useState('1');
@@ -9,7 +10,9 @@ const Tabs = () => {
         {
             id: 1,
             tabTitle: 'Tab 1',
-            content: 'Las tabs se generan automáticamente a partir de un array de objetos, el cual tiene las propiedades: id, tabTitle, title y content.'
+            content: (
+                <HomeScreen />
+            )
         },
         {
             id: 2,
