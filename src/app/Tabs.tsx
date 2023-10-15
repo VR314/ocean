@@ -2,6 +2,7 @@
 import React, { useState } from 'react';
 import "./Tabs.css";
 import EventPage from "./EventPage";
+import Chat from './Chat';
 
 const Tabs = () => {
     const [currentTab, setCurrentTab] = useState('1');
@@ -23,7 +24,6 @@ const Tabs = () => {
             tabTitle: 'Tab 3',
             content: (
                 <div>
-                    <p>Hi, page 3</p>
                 </div>
             )
         }
